@@ -70,6 +70,12 @@ int main(int argc, char* argv[])
     }
 
     Mat custom_image(image.rows-2, image.cols-2, image.type(), &filter[0]);
+    Mat row = Mat::zeros(1, image.cols, image.type());
+    Mat collumn = Mat::zeros(image.rows, 1, image.type());
+    vconcat(row, custom_image, custom_image);
+    vconcat(custom_image, row, custom_image);
+    hconcat(collumn, custom_image, custom_image);
+    hconcat(custom_image, collumn, custom_image);
 
     imshow("Original image", image);
     imshow("Blur Gaussian", image_blur);
